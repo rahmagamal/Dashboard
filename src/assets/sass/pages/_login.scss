@@ -1,0 +1,47 @@
+
+.login{
+    .card{
+        background-color: #252627;
+        opacity: 0.5;
+        margin: auto;
+        padding: 2%;
+    border-radius: 12px;
+    h3,h6{
+        text-align: center;
+    }
+        h3,h6,label{
+            color:#67bbaf
+        }
+
+        input{
+            background-color: #a7a49e;
+              color:black;
+             border: 1px solid #a7a49e;
+        }
+        button{
+            color:#67bbaf;
+            border-color: #67bbaf;
+            margin: auto;
+            width: 70%;
+        }
+        button:hover{
+            color:#67bbaf !important;
+            border-color: #67bbaf !important;
+        }
+        .email{
+            position: relative;
+        }
+        .emailIcon{
+            position: absolute;
+            right: 10%;
+             top: 28%;
+        }
+        .password{
+            @extend .email
+        }
+        .passwordIcon{
+            @extend .emailIcon;
+            top: 50%;
+        }
+    }
+}
