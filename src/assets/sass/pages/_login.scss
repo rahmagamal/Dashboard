@@ -1,4 +1,4 @@
-
+$maincolor:#67bbaf;
 .login{
     .card{
         background-color: #252627;
@@ -6,11 +6,12 @@
         margin: auto;
         padding: 2%;
     border-radius: 12px;
+  
     h3,h6{
         text-align: center;
     }
         h3,h6,label{
-            color:#67bbaf
+            color:$maincolor
         }
 
         input{
@@ -19,14 +20,14 @@
              border: 1px solid #a7a49e;
         }
         button{
-            color:#67bbaf;
-            border-color: #67bbaf;
+            color:$maincolor;
+            border-color: $maincolor;
             margin: auto;
             width: 70%;
         }
         button:hover{
-            color:#67bbaf !important;
-            border-color: #67bbaf !important;
+            color:$maincolor !important;
+            border-color: $maincolor !important;
         }
         .email{
             position: relative;
@@ -43,5 +44,19 @@
             @extend .emailIcon;
             top: 50%;
         }
+        a{
+            color:$maincolor
+        }
     }
+    @media screen and (max-width: 768px) {
+        .card{
+            margin-right: 5%;
+            margin-left: 5%;
+            margin-top: 5%;
+        }
+        
+    }
+}
+.error{
+    color:red
 }

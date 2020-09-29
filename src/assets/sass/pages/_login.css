@@ -45,3 +45,19 @@
 .login .card .passwordIcon {
   top: 50%;
 }
+
+.login .card a {
+  color: #67bbaf;
+}
+
+@media screen and (max-width: 768px) {
+  .login .card {
+    margin-right: 5%;
+    margin-left: 5%;
+    margin-top: 5%;
+  }
+}
+
+.error {
+  color: red;
+}
