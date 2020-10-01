@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import login from '../views/login.vue'
+import contactus from '../views/contactus.vue'
+
+import Home from '../views/home.vue'
 
 import { BootstrapVue, IconsPlugin } from '../../node_modules/bootstrap-vue'
 
@@ -14,9 +17,20 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/home ',
+    name: 'Home',
+    component: Home
+  },
+ 
+  {
     path: '/',
     name: 'Login',
     component: login
+  },
+  {
+    path: '/contactus',
+    name: 'contactus',
+    component: contactus
   },
  
 ]

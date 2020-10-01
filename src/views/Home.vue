@@ -1,16 +1,26 @@
 <template>
-  <div class="home">
-    
-   
+  <div class="">
+    sASSSSSSSSSS
+  counter: {{counter}}
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-
-
 export default {
-  name: 'Home',
+  data(){
+     return {
+
+     }
+  },
+  mounted(){
+    console.log("homeeeeeee")
+  },
+  computed:{
+      counter(){
+        return this.$store.state.counter
+   
+      }
+  },
   components: {
     
   }

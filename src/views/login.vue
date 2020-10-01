@@ -65,10 +65,14 @@
 
                         </b-col>
                          <i class="fas fa-lock passwordIcon"></i>
+                 <router-link to="/contactus">
+                      <b-row class="my-1 mb-3">
+                      
+                            <b-button  pill variant="outline-secondary" @click="login()" :disabled="submitStatus === 'PENDING'">Login</b-button>
+                      
+                      </b-row>
+                    </router-link> 
 
-                     <b-row class="my-1 mb-3">
-                          <b-button  pill variant="outline-secondary" @click="login()" :disabled="submitStatus === 'PENDING'">Login</b-button>
-                     </b-row>
                     <hr style="width:100%; background-color:rgb(148 189 183) ; height:1px">
                     <h6>DON'T HAVE ANY ACCOUNT ? <a href="#">SIGNUP</a></h6>
 
@@ -126,7 +130,7 @@ data(){
 
 <style>
 
-body{
+body .login{
     background-image:url('../assets/images/img3.jpg');
      height: 100vh;
     background-position: center;
