@@ -1,10 +1,10 @@
 <template>
 <section class="login">
     <div class="container">
-        <div class="row">
+        <div class="row ">
               <div class="col-md-5 card">
                   <form @submit.prevent="login">
-                      <h3>Login</h3>
+                      <h3>Register</h3>
                       <b-col sm="2">
                         <label for="input-default">Email:</label>
                         </b-col>
@@ -68,13 +68,13 @@
                  <router-link to="/all_resourses">
                       <b-row class="my-1 mb-3">
                       
-                            <b-button  pill variant="outline-secondary" @click="login()" :disabled="submitStatus === 'PENDING'">Login</b-button>
+                            <b-button  pill variant="outline-secondary" @click="login()" :disabled="submitStatus === 'PENDING'">SignUp</b-button>
                       
                       </b-row>
                     </router-link> 
 
                     <hr style="width:100%; background-color:rgb(148 189 183) ; height:1px">
-                    <h6>DON'T HAVE ANY ACCOUNT ? <a href="register">SIGNUP</a></h6>
+                    <h6>Already have an account? <a href="/">Login</a></h6>
 
                <div>
   

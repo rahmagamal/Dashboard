@@ -1,24 +1,14 @@
 <template>
   <div class="">
-    
-  
-   counter :{{counter}}
-   <button @click="increase">increase</button>
+    <counter />
   </div>
 </template>
 
 <script>
+import counter from '../components/Counter'
 export default {
-   computed:{
-      counter(){
-        return this.$store.state.counter
-       
-      }
-  },
-  methods:{
-      increase(){
-          return this.$store.state.counter ++;
-      }
-  }
+   components:{
+       counter
+   }
 }
 </script>

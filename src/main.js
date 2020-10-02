@@ -6,7 +6,7 @@ import store from './store'
 import Vuelidate from 'vuelidate'
 Vue.use(Vuelidate)
 
-
+// import './axios'
 /**
  * import main scss
  */
