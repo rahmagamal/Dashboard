@@ -65,13 +65,13 @@
 
                         </b-col>
                          <i class="fas fa-lock passwordIcon"></i>
-                 <router-link to="#">
+                  <!-- <router-link   to='/all_resourses'> -->
                       <b-row class="my-1 mb-3">
-                      
+                     
                             <b-button  pill variant="outline-secondary" @click="submit()" :disabled="submitStatus === 'PENDING'">Login</b-button>
                       
                       </b-row>
-                    </router-link> 
+                    <!-- </router-link >  -->
 
                     <hr style="width:100%; background-color:rgb(148 189 183) ; height:1px">
                     <h6>DON'T HAVE ANY ACCOUNT ? <a href="register">SIGNUP</a></h6>
@@ -87,7 +87,7 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import {mapActions ,mapGetters} from 'vuex'
 
 import { required , minLength , email} from '../../node_modules/vuelidate/lib/validators'
 export default {
@@ -110,6 +110,15 @@ form:{    email: {
       required,
       minLength:minLength(8)
     }}
+  },
+  computed:{
+    ...mapGetters({
+           authenticated:'auth/authenticated',
+           user:'auth/user',
+     
+  
+     }),
+    
   },
    methods: {
 
@@ -140,10 +149,22 @@ form:{    email: {
        logIn:'auth/logIn' //module name /function name
      }),
      submit() {
-       console.log("login",this.form)
-        this.logIn(this.form)
-     }
-  }
+        this.logIn(this.form).then(()=>{
+
+          this.$router.replace({
+            name:'AllResourses'
+          })
+        }).catch(()=>{
+          console.log('faild')
+        })
+     
+
+     },
+     
+
+     
+  },
+  
 }
 </script>
 

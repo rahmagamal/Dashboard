@@ -1,10 +1,22 @@
 import axios from 'axios'
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+Vue.use(VueRouter)
 export default {  
     namespaced:true,
   state: {
-   token:'',
+   token: '',
    user:'',
  
+  },
+  getters:{
+    authenticated(state){
+      return state.token 
+    },
+
+    user(state){
+      return state.user
+    }
   },
 
   mutations: {
@@ -23,23 +35,22 @@ export default {
       console.log('aaa',credentails)
         let response = await axios.post('https://reqres.in/api/register' ,credentails)
         console.log('token',response.status)
-        // dispatch('attempt',response.data.token)
-        if (response.status == 200) {
-          console.log('2000000')
-          this.$router.push({path:"/all_resourses"});
-        }
-    },
-    async attempt({commit},token){
-      commit('SET_TOKEN' ,token)
-      try{
-          let response= axios.get('https://reqres.in/api/register')
-        commit('SET_USER' ,response.data)
+      localStorage.setItem('token',response.data.token) 
 
-      }
-      catch(e){
-        console.log('faild')
-      }
+        // dispatch('attempt',response.data.token)
+        
     },
+    // async attempt({commit},token){
+    //   commit('SET_TOKEN' ,token)
+    //   try{
+    //       let response= axios.get('https://reqres.in/api/register')
+    //     commit('SET_USER' ,response.data)
+
+    //   }
+    //   catch(e){
+    //     console.log('faild')
+    //   }
+    // },
 
 
   async logIn(_ , credentails){
@@ -47,11 +58,12 @@ export default {
     console.log('aaa',credentails)
       let response = await axios.post('https://reqres.in/api/login' ,credentails)
       console.log('token',response)
-     
-      if (response.status == 200) {
-      
-        this.$router.push({path:"/all_resourses"});
-      }
+      localStorage.setItem('token',response.data.token) 
+      // if (response.status == 200) {
+      //   document.location.href ='/all_resourses'
+        
+      // }
+
   },
   
   }

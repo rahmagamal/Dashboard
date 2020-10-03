@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row ">
               <div class="col-md-5 card">
-                  <form @submit.prevent="login">
+                  <form @submit.prevent="signIn">
                       <h3>Register</h3>
                       <b-col sm="2">
                         <label for="input-default">Email:</label>
@@ -65,13 +65,12 @@
 
                         </b-col>
                          <i class="fas fa-lock passwordIcon"></i>
-                 <router-link to="#">
+ 
                       <b-row class="my-1 mb-3">
                       
                             <b-button  pill variant="outline-secondary" @click="submit()" :disabled="submitStatus === 'PENDING'">SignUp</b-button>
                       
                       </b-row>
-                    </router-link> 
 
                     <hr style="width:100%; background-color:rgb(148 189 183) ; height:1px">
                     <h6>Already have an account? <a href="/">Login</a></h6>
@@ -116,7 +115,14 @@ data(){
        signIn:'auth/signIn' //module name /function name
      }),
      submit() {
-        this.signIn(this.form)
+        this.signIn(this.form).then(()=>{
+
+          this.$router.replace({
+            name:'AllResourses'
+          })
+        }).catch(()=>{
+          console.log('faild')
+        })
      }
    }
 }
