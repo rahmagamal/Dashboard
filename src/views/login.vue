@@ -11,8 +11,8 @@
                         
                      
                         <b-col sm="12" class="mb-3 email  ">
-                        <b-form-input  v-model.trim="$v.email.$model" id="input-default"
-                        :class="{ 'is-invalid': $v.email.$error }"
+                        <b-form-input  v-model.trim="$v.form.email.$model" id="input-default"
+                        :class="{ 'is-invalid': $v.form.email.$error }"
                         class="form__input"
                          size="sm" placeholder="Enter your Email"
                          type="text"
@@ -20,13 +20,13 @@
                          ></b-form-input>
                          <div class="error" >
                              <p
-                                v-if="!$v.email.required && $v.email.$error"
+                                v-if="!$v.form.email.required && $v.form.email.$error"
                                
                                 >
                                 Email is required.
                                 </p>
                                 <p
-                                v-if="!$v.email.email && $v.email.$error"
+                                v-if="!$v.form.email.email && $v.form.email.$error"
                                
                                 >
                                 Enter valid email.
@@ -42,22 +42,22 @@
                         </b-col>
                         <b-col sm="12" class="mb-3 password">
                         <b-form-input type="password" 
-                        v-model.trim="$v.password.$model"
-                        :class="{ 'is-invalid': $v.password.$error }"
+                        v-model.trim="$v.form.password.$model"
+                        :class="{ 'is-invalid': $v.form.password.$error }"
                          id="input-default" size="sm" placeholder="Enter your Password"></b-form-input>
                        <div class="error">
                             <div class="error" >
                              <p
-                                v-if="!$v.password.required && $v.password.$error"
+                                v-if="!$v.form.password.required && $v.form.password.$error"
                                
                                 >
                                 Password is required.
                                 </p>
                                 <p
-                                v-if="!$v.password.minLength && $v.password.$error"
+                                v-if="!$v.form.password.minLength && $v.form.password.$error"
                                
                                 >
-                                Password must have at least {{$v.passwords.$params.minLength.min}} letters.
+                                Password must have at least {{$v.form.passwords.$params.minLength.min}} letters.
                                 </p>
                          </div>
                        </div>
@@ -65,10 +65,10 @@
 
                         </b-col>
                          <i class="fas fa-lock passwordIcon"></i>
-                 <router-link to="/all_resourses">
+                 <router-link to="#">
                       <b-row class="my-1 mb-3">
                       
-                            <b-button  pill variant="outline-secondary" @click="login()" :disabled="submitStatus === 'PENDING'">Login</b-button>
+                            <b-button  pill variant="outline-secondary" @click="submit()" :disabled="submitStatus === 'PENDING'">Login</b-button>
                       
                       </b-row>
                     </router-link> 
@@ -87,17 +87,21 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
+
 import { required , minLength , email} from '../../node_modules/vuelidate/lib/validators'
 export default {
 data(){
     return{
-        email:'',
+       form:
+       { email:'',
         password:'',
+        },
          submitStatus: null
     }
 },
  validations: {
-    email: {
+form:{    email: {
       required,
       email
       
@@ -105,25 +109,40 @@ data(){
     password: {
       required,
       minLength:minLength(8)
-    }
+    }}
   },
    methods: {
 
-     login() {
-    
-      this.$v.$touch()
-      
-      if (this.$v.$invalid) {
-        this.submitStatus = 'ERROR'
-      } else {
-        // do your submit logic here
-        this.submitStatus = 'PENDING'
-        setTimeout(() => {
-          this.submitStatus = 'OK'
-        }, 500)
-      }
-      console.log(this.submitStatus)
-    }
+    // login: function() {
+    //   this.$v.$touch();
+    //   if (!this.$v.$error) {
+    //     let email = this.form.email;
+    //     let password = this.from.password;
+    //     this.$store
+    //       .dispatch("login", { email, password })
+    //       .then(() => {
+
+    //         // this.$router.push("/");
+            
+
+    //         // call permissions
+    //         // any  action after login
+    //         // this.$getPermissions();
+    //       })
+    //       .catch(err => {
+    //         if (err == 401) {
+    //           this.invalidEmail = true;
+    //         }
+    //       });
+    //   }
+    // },
+   ...mapActions({
+       logIn:'auth/logIn' //module name /function name
+     }),
+     submit() {
+       console.log("login",this.form)
+        this.logIn(this.form)
+     }
   }
 }
 </script>
@@ -135,6 +154,6 @@ body .login{
      height: 100vh;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 100% 100%;
 }
 </style>
