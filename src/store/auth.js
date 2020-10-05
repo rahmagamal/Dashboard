@@ -16,7 +16,13 @@ export default {
 
     user(state){
       return state.user
-    }
+    },
+    
+      // isLoggedIn: state => !!state.token,
+      // authStatus: state => state.status,
+      // userData: state => state.admin
+
+
   },
 
   mutations: {
@@ -26,7 +32,11 @@ export default {
 
      SET_USER(state,data){
       state.user=data
-    }
+    },
+    logout(state) {
+    
+      state.token = ''
+  }
   },
   actions: {
    
@@ -65,6 +75,14 @@ export default {
       // }
 
   },
+  logout({ commit }) {
+    return new Promise(() => {
+        commit('logout')
+        localStorage.removeItem('token')
+    
+    })
+},
+
   
   }
 }

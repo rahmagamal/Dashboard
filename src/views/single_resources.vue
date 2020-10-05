@@ -3,9 +3,10 @@
     <Header />
       <div class="container">
          <div class="navigation mb-3">
-          <h4>Resources</h4>
+          <h4>Single Resources</h4>
+         
         </div>
-          <table class="table table-striped table-responsive-md ">
+          <table class="table table-striped table-responsive-md">
             <thead>
                 <tr>
                 <th scope="col">Id</th>
@@ -16,18 +17,17 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="resourse in allResourses" :key="resourse.id">
-                <th scope="row">{{resourse.id}}</th>
-                <td>{{resourse.name}}</td>
-                <td>{{resourse.year}}</td>
-                <td> {{resourse.color}}</td>
-                <td>{{resourse.pantone_value}}</td>
+                <tr >
+                <th >{{singelResource.data.id}}</th>
+                <td>{{singelResource.data.name}}</td>
+                <td>{{singelResource.data.year}}</td>
+                <td>{{singelResource.data.color}}</td>
+                <td>{{singelResource.data.pantone_value}}</td>
                 </tr>
             
             </tbody>
          </table>
-     
-
+    
       </div>
       
   </div>
@@ -43,28 +43,25 @@ export default {
   },
   data(){
       return{
-            allResourses:[],
+            singelResource:{},
             errors:[],
             data:{},
-            
       }
   },
   methods:{
-      getAllResourses(){
-          axios.get(`https://reqres.in/api/unknown`)
+      getsingelResource(){
+          axios.get(`https://reqres.in/api/unknown/2`)
         .then(response => {
-        this.allResourses = response.data.data
+        this.singelResource = response.data
         this.data=response.data
-        console.log("ressssssssssssss",response)
+        console.log("ressssssssssssss", this.singelResource )
         })
-             
-      
-
+              
         }
   },
   mounted() {
 
-        this.getAllResourses()
+        this.getsingelResource()
     
   }
 }

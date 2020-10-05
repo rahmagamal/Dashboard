@@ -12,3 +12,7 @@
 .allUsers th {
   color: gray;
 }
+
+.allUsers .textcolor {
+  color: #67bbaf;
+}

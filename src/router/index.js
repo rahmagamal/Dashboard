@@ -3,12 +3,13 @@ import VueRouter from 'vue-router'
 import login from '../views/login.vue'
 import Register from '../views/register.vue'
 
-import contactus from '../views/contactus.vue'
 import AllResourses from '../views/all_resourses.vue'
+import SingleResources from '../views/single_resources.vue'
+
 import AllUsers from '../views/all_users.vue'
 
 
-
+// import store from '../store' 
 import Home from '../views/home.vue'
 
 import { BootstrapVue, IconsPlugin } from '../../node_modules/bootstrap-vue'
@@ -42,6 +43,11 @@ const routes = [
     path: '/all_resourses',
     name: 'AllResourses',
     component: AllResourses
+  }, 
+  {
+    path: '/single_resources',
+    name: 'SingleResources',
+    component: SingleResources
   },
   {
     path: '/all_users',
@@ -49,11 +55,6 @@ const routes = [
     component: AllUsers
   },
  
-  {
-    path: '/contactus',
-    name: 'contactus',
-    component: contactus
-  },
  
 ]
 
@@ -62,5 +63,22 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+// router.beforeEach((to, from, next) => {
+//   if (to.meta.notRequiresAuth) {
+//       if (store.getters.isLoggedIn) {
+//           next({ name: 'AllResourses' })
+//           return
+//       }
+//       next()
+//   } else {
+//       if (store.getters.isLoggedIn) {
+//           next()
+//           return
+//       }
+//       next({ name: 'Login' })
+//   }
+//   next()
+// })
 
 export default router
