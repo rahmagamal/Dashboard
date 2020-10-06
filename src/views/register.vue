@@ -118,7 +118,7 @@ data(){
         this.signIn(this.form).then(()=>{
 
           this.$router.replace({
-            name:'AllResourses'
+            path:'all_resourses'
           })
         }).catch(()=>{
           console.log('faild')

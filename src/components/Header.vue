@@ -42,11 +42,18 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
 export default {
 methods:{
+    ...mapActions({
+        logoutAction:'auth/logout'
+    }),
+
     logout(){
-        // this.$store.dispatch.logout();
+        this.logoutAction()
         this.$router.replace('/')
+     
+        
     }
 }
 }

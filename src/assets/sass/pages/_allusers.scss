@@ -1,16 +1,18 @@
+$maincolor:#67bbaf;
 .allUsers{
     margin-top: 8%;
     
     .navigation{
         height: 60px;
         background-color: #f9f7f7;
-        color: #67bbaf;
+        color: $maincolor;
         padding: 1%;
     }
     th{
         color:gray;
     }
     .textcolor{
-        color: #67bbaf
+        color: $maincolor
     }
+  
 }

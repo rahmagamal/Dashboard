@@ -108,8 +108,11 @@ form:{    email: {
     },
     password: {
       required,
-      minLength:minLength(8)
+      minLength:minLength(3)
     }}
+  },
+  mounted(){
+   
   },
   computed:{
     ...mapGetters({
@@ -118,45 +121,26 @@ form:{    email: {
      
   
      }),
+     
     
   },
    methods: {
 
-    // login: function() {
-    //   this.$v.$touch();
-    //   if (!this.$v.$error) {
-    //     let email = this.form.email;
-    //     let password = this.from.password;
-    //     this.$store
-    //       .dispatch("login", { email, password })
-    //       .then(() => {
-
-    //         // this.$router.push("/");
-            
-
-    //         // call permissions
-    //         // any  action after login
-    //         // this.$getPermissions();
-    //       })
-    //       .catch(err => {
-    //         if (err == 401) {
-    //           this.invalidEmail = true;
-    //         }
-    //       });
-    //   }
-    // },
+   
    ...mapActions({
        logIn:'auth/logIn' //module name /function name
      }),
      submit() {
         this.logIn(this.form).then(()=>{
 
-          this.$router.replace({
+          this.$router.push({
             name:'AllResourses'
           })
         }).catch(()=>{
           console.log('faild')
         })
+
+    
      
 
      },

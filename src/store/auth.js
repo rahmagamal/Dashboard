@@ -13,15 +13,12 @@ export default {
     authenticated(state){
       return state.token 
     },
-
+    // authenticated:state => state.token,
+    
+    // isLoggedIn: state => !!state.token,
     user(state){
       return state.user
     },
-    
-      // isLoggedIn: state => !!state.token,
-      // authStatus: state => state.status,
-      // userData: state => state.admin
-
 
   },
 
@@ -69,17 +66,13 @@ export default {
       let response = await axios.post('https://reqres.in/api/login' ,credentails)
       console.log('token',response)
       localStorage.setItem('token',response.data.token) 
-      // if (response.status == 200) {
-      //   document.location.href ='/all_resourses'
-        
-      // }
-
+     
   },
   logout({ commit }) {
     return new Promise(() => {
         commit('logout')
         localStorage.removeItem('token')
-    
+   
     })
 },
 

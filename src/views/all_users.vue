@@ -4,16 +4,56 @@
       <div class="container">
         <div class="navigation mb-3">
           <div class="row">
-            <div class="col-md-10">
-                  <h4>Users</h4>
+              <div class="col-md-10">
+                    <h4>Users</h4>
+                
+              </div>
+               <!---- Create modal ----->
+                <div class="col-md-2">
+                 
+                  <b-button v-b-modal.modal-prevent-closing variant="success">Create</b-button>
+                <b-modal
+                  id="modal-prevent-closing"
+                  ref="modal"
+                  title="Submit Your Name"
+                 
+                  @ok="handleOk"
+                >
+                  <form ref="form" @submit.stop.prevent="handleSubmit">
+                    <b-form-group
+                      :state="nameState"
+                      label="Name"
+                      label-for="name-input"
+                      invalid-feedback="Name is required"
+                    >
+                      <b-form-input
+                        id="name-input"
+                        v-model="name"
+                        :state="nameState"
+                        required
+                      ></b-form-input>
+                      
+                    </b-form-group>
+                      <b-form-group
+                      :state="nameState"
+                      label="job"
+                      label-for="job-input"
+                      invalid-feedback="job is required"
+                    >
+                     <b-form-input
+                        id="job-input"
+                        v-model="job"
+                        :state="nameState"
+                        required
+                        
+                      ></b-form-input>
+
+                      </b-form-group>
+                  </form>
+                  
+                </b-modal>
             </div>
-            <div class="col-md-2">
-              <!-- <button type="button" class="btn btn-info">Create user</button> -->
-           
-            </div>
-          </div>
-        
-          
+          </div>     
         </div>
           <table class="table table-striped table-responsive-md">
             <thead>
@@ -24,7 +64,7 @@
                 <th scope="col">Email</th>
                 
                 <th scope="col">Avatar</th>
-                <th scope="col">Action</th>
+                <th scope="col">Delete</th>
 
                 </tr>
             </thead>
@@ -36,13 +76,12 @@
                 <td>{{user.email}}</td>
                 <td> <img :src=user.avatar /></td>
                 <td class="textcolor">
-              <i class="far fa-edit mr-2"
-               @click="updateUser(user.id)"
-              ></i>
-                 <i
-              @click="removeUser(user.id,index)"
-              class="far fa-trash-alt"
-            ></i>
+           
+               <!-- <b-button v-b-modal.modal-prevent-closing variant="primary"  @click="updateUser(user.id)">Edit</b-button> -->
+            
+               <b-button  variant="danger" @click="removeUser(user.id,index)" class="ml-2">Delete</b-button>
+
+             
                 </td>
 
                 </tr>
@@ -74,10 +113,16 @@ export default {
             allUsers:[],
             errors:[],
             data:{},
-            name:'rahma',
-            job:'developer',
+            name:'',
+            job:'',
             currentPage:1,
              limit: 6,
+          
+        nameState: null,
+        submittedNames: [],
+        editName:'',
+        editJob:'',
+             
       }
   },
   methods:{
@@ -99,6 +144,44 @@ export default {
 
         updateUser(id){
             axios.post(`https://reqres.in/api/users/`+id, {
+              name: this.editName,
+              job:this.editJob
+          
+            })
+            // .then(response => {})
+            .catch(e => {
+              this.errors.push(e)
+          })
+        },
+          resetModal() {
+        this.name = ''
+        this.nameState = null
+      },
+     
+        checkFormValidity() {
+        const valid = this.$refs.form.checkValidity()
+        this.nameState = valid
+        return valid
+      },
+    
+      handleOk(bvModalEvt) {
+        // Prevent modal from closing
+        bvModalEvt.preventDefault()
+        // Trigger submit handler
+        this.handleSubmit()
+      },
+      handleSubmit() {
+        // Exit when the form isn't valid
+        if (!this.checkFormValidity()) {
+          return
+        }
+        // Push the name to submitted names
+        this.submittedNames.push(this.name)
+        // Hide the modal manually
+        this.$nextTick(() => {
+          this.$bvModal.hide('modal-prevent-closing')
+        });
+        axios.post(`https://reqres.in/api/users`, {
               name: this.name,
               job:this.job
             })
@@ -106,7 +189,7 @@ export default {
             .catch(e => {
               this.errors.push(e)
           })
-        }
+      }
   },
   mounted(currentPage) {
       
